@@ -1,1 +1,1 @@
-Basic fedora dotfiles for my personal system
+Basic dotfiles for my personal system in sway wm
