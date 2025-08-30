@@ -1,1 +1,1 @@
-Basic dotfiles for my personal system in sway wm
+Basic dotfiles for my personal system
