@@ -2,10 +2,11 @@ set $mod Mod4
 font pango:monospace 8
 bindsym $mod+Return exec kitty
 bindsym $mod+d exec --no-startup-id rofi -show drun
+exec --no-startup-id ~/.config/i3/auto-monitor.sh
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id xinput set-prop "ELAN1203:00 04F3:307A Touchpad" "libinput Tapping Enabled" 1
-bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +3%
-bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 3%-
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +2%
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 2%-
 bindsym $mod+Shift+q kill
 bindsym $mod+j focus left
 bindsym $mod+k focus down

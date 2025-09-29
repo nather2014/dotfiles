@@ -33,6 +33,17 @@ fi
 export LESS='-R'
 
 
+e() {
+  files=(
+    "$HOME/.config/i3/config"
+    "$HOME/.bashrc"
+    "$HOME/.config/nvim/init.lua"
+    $(find "$HOME/Documents" -type f)
+  )
+  selected=$(printf "%s\n" "${files[@]}" | fzf -m)
+  [ -n "$selected" ] && printf "%s\n" "$selected" | xargs -d '\n' nvim
+}
+
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

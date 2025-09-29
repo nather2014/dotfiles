@@ -31,13 +31,11 @@ require("lazy").setup({
   { "williamboman/mason-lspconfig.nvim" },
   { "mfussenegger/nvim-jdtls" },
 
-  -- Completion
-  { "hrsh7th/nvim-cmp" },
-  { "hrsh7th/cmp-nvim-lsp" },
-  { "hrsh7th/cmp-buffer" },
-  { "hrsh7th/cmp-path" },
-  { "L3MON4D3/LuaSnip" },
-  { "windwp/nvim-autopairs" },
+{
+  "windwp/nvim-autopairs",
+  event = "InsertEnter",
+  config = true,
+}
 
   -- Syntax & Navigation
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
@@ -58,7 +56,6 @@ vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
 vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>")
 
 -- LSP setup
-local lspconfig = require("lspconfig")
-require("mason").setup()
-require("mason-lspconfig").setup({ ensure_installed = { "jdtls" } })
-lspconfig.jdtls.setup({})
+vim.lsp.config("jdtls", {})
+vim.lsp.enable("jdtls")
+
