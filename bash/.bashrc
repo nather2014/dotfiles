@@ -33,6 +33,17 @@ fi
 export LESS='-R'
 
 
+c() {
+  selected=$(history | awk '{$1=""; print $0}' | tac | awk '!seen[$0]++' | fzf)
+  [ -n "$selected" ] && eval "$selected"
+}
+
+
+f() {
+  selected=$(find . -type f | fzf -m)
+  [ -n "$selected" ] && printf "%s\n" "$selected" | xargs -d '\n' nvim
+}
+
 e() {
   files=(
     "$HOME/.config/i3/config"
