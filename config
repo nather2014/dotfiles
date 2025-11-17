@@ -1,11 +1,6 @@
-exec kitty
-exec firefox
-assign [class="Firefox"] 2
 set $mod Mod4
-default_border pixel 1
-default_floating_border pixel 1
 output eDP-1 disable
-output HDMI-A-1 mode 1920x1080@60Hz position 0,0
+output HDMI-A-1 mode 1920x1080 position 0,0
 exec swayidle -w \
     timeout 90  'swaylock -f -c 000000' \
     timeout 110 'swaymsg "output * power off"' \
@@ -13,7 +8,7 @@ exec swayidle -w \
     before-sleep 'swaylock -f -c 000000'
 focus_follows_mouse no
 mouse_warping none
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+q kill
 bindsym $mod+d exec wmenu-run
 bindsym $mod+1 workspace 1
@@ -30,5 +25,13 @@ bindsym $mod+Shift+l move right
 bindsym $mod+Shift+1 move container to workspace 1
 bindsym $mod+Shift+2 move container to workspace 2
 bindsym $mod+Shift+3 move container to workspace 3
+bar {
+    position bottom
+    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+    colors {
+        statusline #ffffff
+        background #323232
+        inactive_workspace #32323200 #32323200 #5c5c5c
+    }
+}
 include /etc/sway/config.d/*
-
