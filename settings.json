@@ -1,0 +1,14 @@
+{
+    "editor.fontFamily": "'JetBrains Mono', 'monospace', monospace",
+    "editor.minimap.enabled": false,
+    "breadcrumbs.enabled": false,
+    "editor.renderWhitespace": "none",
+    "redhat.telemetry.enabled": true,
+    "editor.quickSuggestions": {
+        "comments": "off",
+        "strings": "off",
+        "other": "off"
+    },
+    "editor.suggestOnTriggerCharacters": false,
+    "editor.parameterHints.enabled": false
+}
