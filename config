@@ -5,8 +5,8 @@ cp /etc/sway/config ~/.config/sway/config
 
 output eDP-1 disable
 output HDMI-A-1 mode 1920x1080 position 0,0
-default_border pixel 2
-default_floating_border pixel 2
+#default_border pixel 2
+#default_floating_border pixel 2
 exec swayidle -w \
     timeout 90  'swaylock -f -c 000000' \
     timeout 110 'swaymsg "output * power off"' \
