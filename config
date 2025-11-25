@@ -11,6 +11,7 @@ exec swayidle -w \
     resume       'swaymsg "output * power on"' \
     before-sleep 'swaylock -f -c 000000'
 
+sudo apt install sway swaylock swayidle grim slurp wl-clipboard foot
 
 curl -s "https://get.sdkman.io" | bash
 source "$HOME/.sdkman/bin/sdkman-init.sh"
@@ -31,4 +32,5 @@ sudo postgresql-setup --initdb
 sudo systemctl enable --now postgresql
 
 
-
+sudo apt install neovim
+git clone https://github.com/nvim-lua/kickstart.nvim ~/.config/nvim
