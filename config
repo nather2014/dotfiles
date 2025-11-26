@@ -17,6 +17,8 @@ curl -s "https://get.sdkman.io" | bash
 source "$HOME/.sdkman/bin/sdkman-init.sh"
 sdk install java 21-tem maven gradle 
 
+
+
 sudo apt install git curl wget unzip code vim tree 
 
 wget https://update.code.visualstudio.com/latest/linux-deb-x64/stable -O code.deb
