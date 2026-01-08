@@ -53,3 +53,13 @@ sudo systemctl enable --now postgresql
 
 sudo apt install neovim
 git clone https://github.com/nvim-lua/kickstart.nvim ~/.config/nvim
+
+
+
+
+curl -s "https://get.sdkman.io" | bash
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+sdk install java 21.0.9-tem
+sdk install maven
+sdk install gradle
+sudo pacman -S vim nvim 
