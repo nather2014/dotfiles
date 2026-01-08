@@ -62,4 +62,5 @@ source "$HOME/.sdkman/bin/sdkman-init.sh"
 sdk install java 21.0.9-tem
 sdk install maven
 sdk install gradle
-sudo pacman -S vim nvim 
+sudo pacman -S vim nvim
+git clone https://github.com/LazyVim/starter ~/.config/nvim
