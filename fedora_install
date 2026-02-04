@@ -1,0 +1,18 @@
+sudo dnf install -y \
+  git curl wget unzip zip \
+  gcc gcc-c++ make \
+  htop tree jq \
+  java-21-openjdk java-21-openjdk-devel \
+  maven gradle \
+  neovim \
+  docker docker-compose \
+  postgresql postgresql-server \
+  redis \
+  ripgrep fd-find fzf \
+  bat exa \
+  jetbrains-mono-fonts
+
+sudo systemctl enable --now docker
+sudo usermod -aG docker $USER
+
+flatpak install flathub com.jetbrains.IntelliJ-IDEA-Community
