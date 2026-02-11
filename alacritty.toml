@@ -1,0 +1,60 @@
+# Alacritty Configuration
+# Save this as ~/.config/alacritty/alacritty.toml
+
+[window]
+opacity = 0.95
+padding.x = 10
+padding.y = 10
+decorations = "Full"
+startup_mode = "Windowed"
+
+[font]
+normal.family = "JetBrains Mono"
+normal.style = "Regular"
+bold.family = "JetBrains Mono"
+bold.style = "Bold"
+italic.family = "JetBrains Mono"
+italic.style = "Italic"
+bold_italic.family = "JetBrains Mono"
+bold_italic.style = "Bold Italic"
+size = 12.0
+
+[font.offset]
+x = 0
+y = 0
+
+[colors.primary]
+background = "#1e1e1e"
+foreground = "#d4d4d4"
+
+[colors.normal]
+black = "#1e1e1e"
+red = "#f48771"
+green = "#a9dc76"
+yellow = "#ffd866"
+blue = "#78dce8"
+magenta = "#ab9df2"
+cyan = "#85e3f5"
+white = "#d4d4d4"
+
+[colors.bright]
+black = "#6e6e6e"
+red = "#f48771"
+green = "#a9dc76"
+yellow = "#ffd866"
+blue = "#78dce8"
+magenta = "#ab9df2"
+cyan = "#85e3f5"
+white = "#ffffff"
+
+[cursor]
+style.shape = "Block"
+style.blinking = "On"
+blink_interval = 750
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[env]
+TERM = "xterm-256color"
