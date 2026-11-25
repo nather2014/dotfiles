@@ -27,6 +27,7 @@ e2fsprogs
 efibootmgr
 efitools
 egl-wayland
+emacs
 endeavouros-keyring
 endeavouros-mirrorlist
 eos-hooks
@@ -47,9 +48,9 @@ haveged
 hdparm
 hwdetect
 inetutils
+inotify-tools
 intel-media-driver
 intel-ucode
-inotify-tools
 iptables
 iwd
 jfsutils

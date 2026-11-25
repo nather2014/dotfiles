@@ -21,6 +21,21 @@ install packages, run `./install.sh --packages-only`.
 The package list includes system and GPU driver packages. Review it before
 installing on different hardware or another Arch-based distribution.
 
+## Emacs and Org
+
+The Emacs config is in `config/emacs/init.el`. To install Emacs, link the config,
+and create the initial Org files on this machine, run:
+
+```bash
+./setup-emacs.sh
+```
+
+Org notes live in `~/org`, outside this public repository. Use `C-c n a` for the
+agenda, `C-c n c` to capture, `C-c n t` for a task, and `C-c n j` for a journal
+entry. Coding uses Emacs' built-in project tools, Flymake, xref, compile, and
+Eglot. Install a language server for your language, then run `M-x eglot` in a
+project buffer.
+
 ## Sync
 
 This repository is hosted at `https://github.com/nather2014/dotfiles`. On another
