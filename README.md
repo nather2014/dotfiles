@@ -23,16 +23,18 @@ installing on different hardware or another Arch-based distribution.
 
 ## Emacs and Org
 
-The Emacs config is in `config/emacs/init.el`. To install Emacs, Evil and
-evil-org, link the config, and create the initial Org files on this machine, run:
+The Emacs config follows Doom's Evil keybinding layout. It is in
+`config/emacs/init.el`; this installs the bindings without the full Doom
+distribution. To install Emacs, Evil and evil-org, link the config, and create
+the initial Org files on this machine, run:
 
 ```bash
 ./setup-emacs.sh
 ```
 
 Org notes live in `~/org`, outside this public repository. Emacs starts in
-Vim-style Evil mode; press `Space` in normal mode for the notes, project, and
-coding leader shortcuts in [`KEYBINDINGS.md`](KEYBINDINGS.md). Coding uses
+Vim-style Evil mode; press `Space` in normal mode for the Doom-style notes,
+project, and coding shortcuts in [`KEYBINDINGS.md`](KEYBINDINGS.md). Coding uses
 Emacs' built-in project tools, Flymake, xref, compile, and Eglot. Install a
 language server for your language, then run `Space c e` in a project buffer.
 

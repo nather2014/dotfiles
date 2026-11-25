@@ -80,55 +80,85 @@
 (define-key my-notes-map (kbd "p")
             (lambda () (interactive) (org-capture nil "p")))
 
-;; Keep Emacs' standard C-x and M-x keys intact, and put project actions on
-;; the same easy-to-reach C-c prefix used for notes.
+;; Keep Emacs' standard C-x and M-x keys intact. The C-c maps remain available
+;; in Emacs state; Evil users get Doom-style Space leader maps below.
 (require 'project)
+(require 'eglot)
+(require 'windmove)
 (define-key global-map (kbd "C-c p") project-prefix-map)
 
-(defvar my-tools-map (make-sparse-keymap)
-  "Keymap for common editing and coding tools.")
-(define-key global-map (kbd "C-c m") my-tools-map)
-(define-key my-tools-map (kbd "b") #'ibuffer)
-(define-key my-tools-map (kbd "r") #'recentf-open-files)
-(define-key my-tools-map (kbd "d") #'duplicate-dwim)
-(define-key my-tools-map (kbd "c") #'compile)
-(define-key my-tools-map (kbd "e") #'eglot)
-(define-key my-tools-map (kbd "f") #'project-find-file)
-(define-key my-tools-map (kbd "g") #'project-find-regexp)
-(define-key my-tools-map (kbd "p") #'project-switch-project)
+(defmacro my/doom-leader-bind (keys command)
+  "Bind COMMAND to KEYS after Doom-style Space leader in Evil states."
+  `(evil-define-key '(normal visual) 'global
+     (kbd (concat "<leader>" ,keys)) ,command))
 
-;; Space is a thumb-friendly leader in Evil normal/visual states, so frequent
-;; commands do not need Emacs Control chords.
-(evil-define-key '(normal visual) 'global (kbd "<leader>na") #'org-agenda)
-(evil-define-key '(normal visual) 'global (kbd "<leader>nc") #'org-capture)
-(evil-define-key '(normal visual) 'global (kbd "<leader>nt")
-  (lambda () (interactive) (org-capture nil "t")))
-(evil-define-key '(normal visual) 'global (kbd "<leader>nn")
-  (lambda () (interactive) (org-capture nil "n")))
-(evil-define-key '(normal visual) 'global (kbd "<leader>nj")
-  (lambda () (interactive) (org-capture nil "j")))
-(evil-define-key '(normal visual) 'global (kbd "<leader>np")
-  (lambda () (interactive) (org-capture nil "p")))
+;; Doom-style groups, using built-in Emacs commands where possible.
+(my/doom-leader-bind ":" #'execute-extended-command)
+(my/doom-leader-bind "." #'find-file)
+(my/doom-leader-bind " SPC" #'project-find-file)
+(my/doom-leader-bind "ff" #'find-file)
+(my/doom-leader-bind "fr" #'recentf-open-files)
+(my/doom-leader-bind "fs" #'save-buffer)
 
-(evil-define-key '(normal visual) 'global (kbd "<leader>pf") #'project-find-file)
-(evil-define-key '(normal visual) 'global (kbd "<leader>pg") #'project-find-regexp)
-(evil-define-key '(normal visual) 'global (kbd "<leader>pb") #'project-switch-to-buffer)
-(evil-define-key '(normal visual) 'global (kbd "<leader>pc") #'project-compile)
-(evil-define-key '(normal visual) 'global (kbd "<leader>pp") #'project-switch-project)
+(my/doom-leader-bind "bb" #'switch-to-buffer)
+(my/doom-leader-bind "bB" #'ibuffer)
+(my/doom-leader-bind "bd" #'kill-current-buffer)
 
-(evil-define-key '(normal visual) 'global (kbd "<leader>bb") #'ibuffer)
-(evil-define-key '(normal visual) 'global (kbd "<leader>br") #'recentf-open-files)
-(evil-define-key '(normal visual) 'global (kbd "<leader>cd") #'duplicate-dwim)
-(evil-define-key '(normal visual) 'global (kbd "<leader>cc") #'compile)
-(evil-define-key '(normal visual) 'global (kbd "<leader>ce") #'eglot)
-(evil-define-key '(normal visual) 'global (kbd "<leader>cf") #'project-find-file)
-(evil-define-key '(normal visual) 'global (kbd "<leader>cg") #'project-find-regexp)
+(my/doom-leader-bind "pp" #'project-switch-project)
+(my/doom-leader-bind "pf" #'project-find-file)
+(my/doom-leader-bind "pg" #'project-find-regexp)
+(my/doom-leader-bind "pb" #'project-switch-to-buffer)
+(my/doom-leader-bind "pc" #'project-compile)
+
+(my/doom-leader-bind "ss" #'isearch-forward)
+(my/doom-leader-bind "sp" #'project-find-regexp)
+(my/doom-leader-bind "si" #'imenu)
+
+(my/doom-leader-bind "cc" #'compile)
+(my/doom-leader-bind "ce" #'eglot)
+(my/doom-leader-bind "cr" #'eglot-rename)
+(my/doom-leader-bind "ca" #'eglot-code-actions)
+(my/doom-leader-bind "cf" #'eglot-format-buffer)
+
+(my/doom-leader-bind "na" #'org-agenda)
+(my/doom-leader-bind "nn" #'org-capture)
+(my/doom-leader-bind "nt" (lambda () (interactive) (org-capture nil "t")))
+(my/doom-leader-bind "nj" (lambda () (interactive) (org-capture nil "j")))
+(my/doom-leader-bind "np" (lambda () (interactive) (org-capture nil "p")))
+
+(my/doom-leader-bind "hf" #'describe-function)
+(my/doom-leader-bind "hk" #'describe-key)
+(my/doom-leader-bind "hv" #'describe-variable)
+(my/doom-leader-bind "hm" #'describe-mode)
+(my/doom-leader-bind "qq" #'save-buffers-kill-terminal)
+
+(my/doom-leader-bind "wv" #'split-window-right)
+(my/doom-leader-bind "ws" #'split-window-below)
+(my/doom-leader-bind "wd" #'delete-window)
+(my/doom-leader-bind "wo" #'delete-other-windows)
+(my/doom-leader-bind "ww" #'other-window)
+(my/doom-leader-bind "wh" #'windmove-left)
+(my/doom-leader-bind "wj" #'windmove-down)
+(my/doom-leader-bind "wk" #'windmove-up)
+(my/doom-leader-bind "wl" #'windmove-right)
+
+(when (require 'which-key nil t)
+  (which-key-mode 1)
+  (setq which-key-idle-delay 0.35))
 
 (require 'evil-org)
 (evil-org-set-key-theme '(navigation insert textobjects additional todo heading))
 (add-hook 'org-mode-hook #'evil-org-mode)
 (require 'evil-org-agenda)
 (evil-org-agenda-set-keys)
+
+;; Doom's major-mode local leader convention is SPC m.
+(evil-define-key 'normal org-mode-map (kbd "<leader>ma") #'org-agenda)
+(evil-define-key 'normal org-mode-map (kbd "<leader>mc") #'org-capture)
+(evil-define-key 'normal org-mode-map (kbd "<leader>mt") #'org-todo)
+(evil-define-key 'normal org-mode-map (kbd "<leader>ms") #'org-schedule)
+(evil-define-key 'normal org-mode-map (kbd "<leader>md") #'org-deadline)
+(evil-define-key 'normal org-mode-map (kbd "<leader>ml") #'org-store-link)
 
 (with-eval-after-load 'org
   (setq org-src-fontify-natively t
