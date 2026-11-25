@@ -26,6 +26,18 @@
               tab-width 4
               fill-column 88)
 
+;; Evil provides Vim-style modal editing; evil-org adapts its keys for Org.
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(package-initialize)
+(require 'evil)
+(setq evil-want-C-u-scroll t
+      evil-want-C-i-jump nil
+      evil-undo-system 'undo-redo)
+(evil-mode 1)
+(evil-set-leader 'normal (kbd "SPC"))
+(evil-set-leader 'visual (kbd "SPC"))
+
 ;; Org files live outside this public dotfiles repository.
 (require 'org)
 (setq org-directory (expand-file-name "~/org")
@@ -84,6 +96,39 @@
 (define-key my-tools-map (kbd "f") #'project-find-file)
 (define-key my-tools-map (kbd "g") #'project-find-regexp)
 (define-key my-tools-map (kbd "p") #'project-switch-project)
+
+;; Space is a thumb-friendly leader in Evil normal/visual states, so frequent
+;; commands do not need Emacs Control chords.
+(evil-define-key '(normal visual) 'global (kbd "<leader>na") #'org-agenda)
+(evil-define-key '(normal visual) 'global (kbd "<leader>nc") #'org-capture)
+(evil-define-key '(normal visual) 'global (kbd "<leader>nt")
+  (lambda () (interactive) (org-capture nil "t")))
+(evil-define-key '(normal visual) 'global (kbd "<leader>nn")
+  (lambda () (interactive) (org-capture nil "n")))
+(evil-define-key '(normal visual) 'global (kbd "<leader>nj")
+  (lambda () (interactive) (org-capture nil "j")))
+(evil-define-key '(normal visual) 'global (kbd "<leader>np")
+  (lambda () (interactive) (org-capture nil "p")))
+
+(evil-define-key '(normal visual) 'global (kbd "<leader>pf") #'project-find-file)
+(evil-define-key '(normal visual) 'global (kbd "<leader>pg") #'project-find-regexp)
+(evil-define-key '(normal visual) 'global (kbd "<leader>pb") #'project-switch-to-buffer)
+(evil-define-key '(normal visual) 'global (kbd "<leader>pc") #'project-compile)
+(evil-define-key '(normal visual) 'global (kbd "<leader>pp") #'project-switch-project)
+
+(evil-define-key '(normal visual) 'global (kbd "<leader>bb") #'ibuffer)
+(evil-define-key '(normal visual) 'global (kbd "<leader>br") #'recentf-open-files)
+(evil-define-key '(normal visual) 'global (kbd "<leader>cd") #'duplicate-dwim)
+(evil-define-key '(normal visual) 'global (kbd "<leader>cc") #'compile)
+(evil-define-key '(normal visual) 'global (kbd "<leader>ce") #'eglot)
+(evil-define-key '(normal visual) 'global (kbd "<leader>cf") #'project-find-file)
+(evil-define-key '(normal visual) 'global (kbd "<leader>cg") #'project-find-regexp)
+
+(require 'evil-org)
+(evil-org-set-key-theme '(navigation insert textobjects additional todo heading))
+(add-hook 'org-mode-hook #'evil-org-mode)
+(require 'evil-org-agenda)
+(evil-org-agenda-set-keys)
 
 (with-eval-after-load 'org
   (setq org-src-fontify-natively t

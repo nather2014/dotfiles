@@ -15,6 +15,16 @@ sudo pacman -S --needed emacs
 
 mkdir -p "$target_dir" "$HOME/org"
 
+emacs --batch --quick --eval "(progn
+  (require 'package)
+  (setq package-user-dir \"$target_dir/elpa\")
+  (add-to-list 'package-archives '(\"melpa\" . \"https://melpa.org/packages/\") t)
+  (package-initialize)
+  (unless (and (package-installed-p 'evil) (package-installed-p 'evil-org))
+    (package-refresh-contents))
+  (unless (package-installed-p 'evil) (package-install 'evil))
+  (unless (package-installed-p 'evil-org) (package-install 'evil-org)))"
+
 if [[ -L "$target_file" ]] && [[ "$(readlink -f -- "$target_file")" == "$source_file" ]]; then
     echo "Emacs config already points to this repository."
 else
