@@ -30,11 +30,11 @@ and create the initial Org files on this machine, run:
 ./setup-emacs.sh
 ```
 
-Org notes live in `~/org`, outside this public repository. Use `C-c n a` for the
-agenda, `C-c n c` to capture, `C-c n t` for a task, and `C-c n j` for a journal
-entry. Coding uses Emacs' built-in project tools, Flymake, xref, compile, and
-Eglot. Install a language server for your language, then run `M-x eglot` in a
-project buffer.
+Org notes live in `~/org`, outside this public repository. See
+[`KEYBINDINGS.md`](KEYBINDINGS.md) for the notes, project, and coding shortcuts.
+Coding uses Emacs' built-in project tools, Flymake, xref, compile, and Eglot.
+Install a language server for your language, then run `C-c m e` in a project
+buffer.
 
 ## Sync
 

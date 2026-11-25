@@ -53,12 +53,37 @@
                         (todo "WAITING")))))
 
 (make-directory org-directory t)
-(global-set-key (kbd "C-c n a") #'org-agenda)
-(global-set-key (kbd "C-c n c") #'org-capture)
-(global-set-key (kbd "C-c n t")
-                (lambda () (interactive) (org-capture nil "t")))
-(global-set-key (kbd "C-c n j")
-                (lambda () (interactive) (org-capture nil "j")))
+
+(defvar my-notes-map (make-sparse-keymap)
+  "Keymap for notes, tasks, and Org agenda commands.")
+(define-key global-map (kbd "C-c n") my-notes-map)
+(define-key my-notes-map (kbd "a") #'org-agenda)
+(define-key my-notes-map (kbd "c") #'org-capture)
+(define-key my-notes-map (kbd "t")
+            (lambda () (interactive) (org-capture nil "t")))
+(define-key my-notes-map (kbd "n")
+            (lambda () (interactive) (org-capture nil "n")))
+(define-key my-notes-map (kbd "j")
+            (lambda () (interactive) (org-capture nil "j")))
+(define-key my-notes-map (kbd "p")
+            (lambda () (interactive) (org-capture nil "p")))
+
+;; Keep Emacs' standard C-x and M-x keys intact, and put project actions on
+;; the same easy-to-reach C-c prefix used for notes.
+(require 'project)
+(define-key global-map (kbd "C-c p") project-prefix-map)
+
+(defvar my-tools-map (make-sparse-keymap)
+  "Keymap for common editing and coding tools.")
+(define-key global-map (kbd "C-c m") my-tools-map)
+(define-key my-tools-map (kbd "b") #'ibuffer)
+(define-key my-tools-map (kbd "r") #'recentf-open-files)
+(define-key my-tools-map (kbd "d") #'duplicate-dwim)
+(define-key my-tools-map (kbd "c") #'compile)
+(define-key my-tools-map (kbd "e") #'eglot)
+(define-key my-tools-map (kbd "f") #'project-find-file)
+(define-key my-tools-map (kbd "g") #'project-find-regexp)
+(define-key my-tools-map (kbd "p") #'project-switch-project)
 
 (with-eval-after-load 'org
   (setq org-src-fontify-natively t
@@ -68,8 +93,6 @@
 ;; Built-in project.el, Flymake, xref, compile, and Eglot are ready to use.
 ;; Run M-x eglot after installing a language server for the language you use.
 (add-hook 'prog-mode-hook #'flymake-mode)
-(global-set-key (kbd "C-c c") #'compile)
-(global-set-key (kbd "C-c e") #'eglot)
 (global-set-key (kbd "M-.") #'xref-find-definitions)
 
 (setq compilation-scroll-output 'first-error
