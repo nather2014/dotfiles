@@ -49,6 +49,7 @@ hwdetect
 inetutils
 intel-media-driver
 intel-ucode
+inotify-tools
 iptables
 iwd
 jfsutils
